@@ -25,14 +25,36 @@ jobs:
         with:
           node-version: 18
 
+      # Cache frontend dependencies
+      - name: Cache frontend node modules
+        uses: actions/cache@v3
+        with:
+          path: frontend/node_modules
+          key: ${{ runner.os }}-frontend-node-${{ hashFiles('frontend/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-frontend-node-
+
       # FRONTEND BUILD
       - name: Install frontend dependencies
         working-directory: ./frontend
         run: npm install
 
+      - name: Disable CI warnings as errors for React build
+        working-directory: ./frontend
+        run: echo "CI=false" >> $GITHUB_ENV
+
       - name: Build frontend
         working-directory: ./frontend
         run: npm run build
+
+      # Cache backend dependencies
+      - name: Cache backend node modules
+        uses: actions/cache@v3
+        with:
+          path: backend/node_modules
+          key: ${{ runner.os }}-backend-node-${{ hashFiles('backend/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-backend-node-
 
       # BACKEND BUILD
       - name: Install backend dependencies

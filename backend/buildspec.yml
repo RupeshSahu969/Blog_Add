@@ -1,0 +1,16 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 18
+    commands:
+      - cd backend
+      - npm install
+  build:
+    commands:
+      - echo "No build step for backend"
+artifacts:
+  files:
+    - '**/*'
+  base-directory: backend

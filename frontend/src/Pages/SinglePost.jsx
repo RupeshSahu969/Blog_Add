@@ -80,7 +80,7 @@ const SinglePost = () => {
 
   if (!post) return null;
 
-  const isAuthor = user?.id === post.author?._id;
+  
 
   return (
     <>

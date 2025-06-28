@@ -8,7 +8,7 @@ const SinglePost = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const { isAuthenticated, user } = useContext(AuthContext); // Auth & user info
+  const { isAuthenticated} = useContext(AuthContext); // Auth & user info
 
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -80,7 +80,7 @@ const SinglePost = () => {
 
   if (!post) return null;
 
-  
+
 
   return (
     <>
